@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser")
 const session = require("express-session");
 const flash = require('connect-flash')
+const dotenv = require('dotenv')
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
@@ -15,22 +16,24 @@ app.use(session({
 }))
 app.use(flash())
 
+dotenv.config();
+
 //Data Base connection
 const connection = require("./database/database");
 connection.authenticate() .then(() =>{
-    console.log("Connected!");
+    console.log(`Connected to ${process.env.DATA_BASE}!`);
 }).catch((error) => {
     console.log(error);
 });
 
-Controllers
+//Controllers
 const AdminController = require("./controllers/Admin/AdminController");
 app.use("/", AdminController);
 
 const AdsController = require("./controllers/Ads/AdsController");
 app.use("/", AdsController);
 
-const ClientsController = require("./controllers/Clients/ClientsController");
+const ClientsController = require("./controllers/Clients/ClientController");
 app.use("/", ClientsController);
 
 const HomeController = require("./controllers/Home/HomeController");
