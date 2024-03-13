@@ -7,7 +7,25 @@ const flash = require('connect-flash')
 const dotenv = require('dotenv')
 
 app.set('view engine', 'ejs');
-app.use(express.static('public'));
+
+app.set('views', 'views/Pages');
+
+app.use(function(req, res, next) {
+    let staticPath;
+    if (req.url === '/') {
+        console.log("HOME " + req.url)
+        staticPath = 'views/Pages/home';
+    } else {
+        console.log("ADMIN " + req.url)
+        staticPath = `views/Pages/${req.url}`;
+    }
+    console.log("---------------------")
+    app.use(express.static(staticPath));
+    next();
+});
+
+
+
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(cookieParser("$2a$10$otMKbi0cL.kXBb/lfth21e4M7pjWkNOEEP8mePiLjEF0jMx30.tgm"))

@@ -1,0 +1,24 @@
+<%- include ('../../partials/header.ejs') %>
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white mb-4">
+        <a href="/" class="navabar-brand"><img src="/img/Logo.png" width="120" height="79.09"></a>
+    </nav>
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <section class="col-12 col-sm-6 col-md-3 shadow p-3 mb-5 bg-white rounded">
+                    <form class="form-container" method="POST" action="/users/authenticate">
+                        <h2 class="text-left"><strong>Login</strong></h2><br>
+
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="email" placeholder="Email"><br>
+
+                            <input class="form-control" type="password" name="password" placeholder="Senha"><br>
+                        </div>
+
+                        <button class="btn btn-custom btn-block" type="submit">Entrar</button>
+                    </form>
+                </section>
+            </div>
+        </div>
+</div>
+<%- include ('../../partials/footer.ejs') %>
