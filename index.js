@@ -15,11 +15,12 @@ app.use(function(req, res, next) {
     if (req.url === '/') {
         console.log("HOME " + req.url)
         staticPath = 'views/Pages/home';
-    } else {
+    } else if (req.url.includes('img')){
+        staticPath = "public";
+    }else {
         console.log("ADMIN " + req.url)
         staticPath = `views/Pages/${req.url}`;
     }
-    console.log("---------------------")
     app.use(express.static(staticPath));
     next();
 });
